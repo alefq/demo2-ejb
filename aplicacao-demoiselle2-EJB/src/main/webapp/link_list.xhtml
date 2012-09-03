@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+
+			<p:fieldset legend="#{messages['link.label']}" toggleable="true"
+				toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					<h:outputLabel value="#{messages['link.label.link']}: "
+						for="link" styleClass="text-input" />
+					<h:inputText id="link" value="#{linkMB.url}"
+						title="#{messages['link.alt.link']}" />
+					<p:message for="link" />
+				</h:panelGrid>
+			</p:fieldset>
+
+			<p:commandButton value="#{messages['button.save']}" 
+				action="#{linkMB.enviaLink}" ajax="false" />
+
+			<p:dataTable id="list" var="bean"
+				value="#{linkMB.listLinks}">
+				<p:column sortBy="#{bean.link}">
+					<f:facet name="header">#{messages['link.label.link']}</f:facet>
+					<h:outputText value="#{bean.link}"/>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
